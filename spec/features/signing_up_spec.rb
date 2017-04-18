@@ -22,5 +22,5 @@ require "rails_helper"
 
           expect(page).to have_content("You have not signed up successfully")
       end
-    
+
 end
