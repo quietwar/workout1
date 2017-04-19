@@ -1,22 +1,24 @@
 require "rails_helper"
 
-RSpec.feature "Editing an Articles" do
+RSpec.feature "Editing an Clap" do
 
   before  do
-    @article = Article.create(title: "First Article", body: "Lorem Ipsum")
+      john = User.create(email: "john@example.com", password: "password")
+      login_as(john)
+      @article = Article.create(title: "The first clap", body: "Lorem Ipsum", user: john)
   end
 
-  scenario "A user updates an article" do
+  scenario "A user updates a clap" do
     visit "/"
 
     click_link @article.title
-    click_link "Edit Article"
+    click_link "Edit Clap"
 
-    fill_in "Title", with: "Updated Article"
+    fill_in "Title", with: "Updated Clap"
 	  fill_in "Body", with: "Lorem Ipsum"
-    click_button "Update Article"
+    click_button "Update Clap"
 
-    expect(page).to have_content("Article has been updated")
+    expect(page).to have_content("Clap has been updated")
     expect(page.current_path).to eq(article_path(@article))
   end
 end
