@@ -27,9 +27,17 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
+		unless @article.user == current_user
+			flash_message = "You can only edit your own clap"
+			redirect_to root_path
+		end
 	end
 
 	def update
+		unless @article.user == current_user
+			flash_message = "You can only edit your own clap"
+			redirect_to root_path
+	else
 		if @article.update(article_params)
 			flash[:success] = "Clap has been updated"
 			redirect_to @article
@@ -38,7 +46,7 @@ class ArticlesController < ApplicationController
 			render :edit
 		end
 	end
-
+end
 		def destroy
 			if @article.destroy
 				flash[:success] = "Clap has been deleted."

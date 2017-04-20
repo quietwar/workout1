@@ -14,8 +14,8 @@ RSpec.feature "Editing an Clap" do
     click_link @article.title
     click_link "Edit Clap"
 
-    fill_in "Title", with: "Updated Clap"
-	  fill_in "Body", with: "Lorem Ipsum"
+    fill_in "Bug in the Code", with: "Updated Clap"
+	  fill_in "Describe the Bug", with: "Lorem Ipsum"
     click_button "Update Clap"
 
     expect(page).to have_content("Clap has been updated")
