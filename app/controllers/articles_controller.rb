@@ -6,7 +6,8 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-
+		@chat = @article.chats.build
+		@chats = @article.chats
 	end
 
 	def new

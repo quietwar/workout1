@@ -16,3 +16,64 @@
   </div>
   <% end %>
 </article>
+
+<hr>
+<div class="col-md-12">
+  <%= form_for [@article, @chat],
+  :html => {class: "form-hortizontal", role: "form"} do |f| %>
+  <% if @chat.errors.any? %>
+    <div class='panel panel-danger col-md-offset-1'>
+      <div class='panel-heading'>
+        <h2 class='panel-title'>
+          <%= pluralize(@chat.errors.count, "error") %>
+          prohibited this chat from being saved:
+        </h2>
+        <div class='panel-body'
+        <ul>
+          <% @chat.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class='form-group'>
+    <div class='control-label col-md-2'>
+      <%= f.label :body, 'New Chat' %>
+    </div>
+    <div class="col-md-10">
+      <%= f.text_area :body, rows: 10, class: 'form-control', placeholder: 'Your chat' %>
+    </div>
+  </div>
+
+      <div class='form-group'>
+        <div class='col-md-offset-2 col-md-10'>
+          <%= f.submit "Add Chat", class: "btn btn-primary btn-lg pull-right" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class='col-md-12'>
+    <header>
+      <h2>Chat</h2>
+    </header>
+
+    <div class='col-md-10'
+      <%if @article.chat.any? %>
+        <% persisted_chats(@chats).each do |chat| %>
+        <div class='chat-body'>
+          <%= chat.body %>
+        </div>
+
+        <div class='chat-time'>
+          <%= time_ago_in_words(chat.created_at) %>
+          ago by <%= chat.user.email %>
+        </div>
+        <hr>
+      <% end %>
+    <% else%>
+    There no chats to show,
+  <% end %>
+  </div>
+</div>
